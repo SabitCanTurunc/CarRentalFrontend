@@ -1,0 +1,8 @@
+<div *ngIf="dataLoaded == false" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<h3>Brands</h3>
+<ul class="list-group">
+  <li (click)="setCurrentBrand(brand)" [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands">{{brand.name}}</li>
+</ul>

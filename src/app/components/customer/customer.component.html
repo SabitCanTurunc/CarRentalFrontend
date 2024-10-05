@@ -1,0 +1,21 @@
+<p>customer works!</p>
+<div *ngIf="dataLoaded == false" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Customers</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let customer of customers">
+    <tr>
+      <td>{{ customer.id }}</td>
+      <td>{{ customer.firstName }}</td>
+      <td>{{ customer.lastName }}</td>
+      <td>{{ customer.email }}</td>
+      <td>{{ customer.companyName }}</td>
+    </tr>
+  </tbody>
+</table>
