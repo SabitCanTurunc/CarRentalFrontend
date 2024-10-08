@@ -1,0 +1,11 @@
+.carousel-item img {
+    max-height: 400px;
+    max-width: 400px; /* Maksimum yükseklik sınırı belirler */
+    object-fit: cover; /* Resmin kırpılarak sığmasını sağlar */
+    width: 100%; /* Resmi genişlik olarak container'a sığdırır */
+}
+
+.container-fixed {
+    height: 800px; /* Yüksekliği sabitleyin */
+    margin: 10%;
+}
