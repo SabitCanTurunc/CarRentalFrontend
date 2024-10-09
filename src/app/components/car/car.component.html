@@ -2,6 +2,13 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Search</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Look for ...">
+</div>
+<div *ngIf="filterText" class="alert alert-primary">
+  {{filterText}} aradınız
+</div>
 
 <table *ngIf="dataLoaded == true" class="table">
   <thead>
@@ -11,12 +18,13 @@
       <th scope="col">Color Name</th>
       <th scope="col">Model Year</th>
       <th scope="col">Daily Price</th>
+      <th scope="col">Taxed Price</th>
       <th scope="col">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let car of cars"
-          routerLink="/cars/details/{{car.carId}}"
+          routerLink="/cars/details/{{car.carId}}"  
           (click)="setCurrentCar(car)"
           
           >
@@ -25,6 +33,7 @@
       <td>{{ car.colorName }}</td>
       <td>{{ car.modelYear }}</td>
       <td>{{ car.dailyPrice |currency }} </td>
+      <td>{{ car.dailyPrice |vatAdded:10 |currency }} </td>
       <td>{{ car.description }}</td>  
     </tr>
   </tbody>

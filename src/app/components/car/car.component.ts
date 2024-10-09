@@ -3,17 +3,20 @@ import { Car } from '../../models/car';
 import { CarService } from '../../services/car.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { VatAddedPipe } from "../../pipes/vat-added.pipe";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-car',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, VatAddedPipe,FormsModule],
   templateUrl: './car.component.html',
   styleUrl: './car.component.css',
 })
 export class CarComponent implements OnInit {
   cars: Car[] = [];
   currentCar : Car | null=null;
+  filterText:string| null=null;  
 
   dataLoaded = false;
   constructor(
