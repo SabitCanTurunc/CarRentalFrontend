@@ -16,14 +16,14 @@ import { FormsModule } from '@angular/forms';
 export class CarComponent implements OnInit {
   cars: Car[] = [];
   currentCar : Car | null=null;
-  filterText:string| null=null;  
+  filterText:string| null;  
 
   dataLoaded = false;
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute
   ) {}
-
+//good for you
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['brandId']) {
