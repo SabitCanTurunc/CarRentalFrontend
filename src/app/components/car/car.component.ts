@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { VatAddedPipe } from "../../pipes/vat-added.pipe";
 import { FormsModule } from '@angular/forms';
+import { FilterPipePipe } from '../../pipes/filter-pipe.pipe';
 
 @Component({
   selector: 'app-car',
   standalone: true,
-  imports: [CommonModule, RouterModule, VatAddedPipe,FormsModule],
+  imports: [CommonModule, RouterModule, VatAddedPipe,FilterPipePipe, FormsModule],
   templateUrl: './car.component.html',
   styleUrl: './car.component.css',
 })
