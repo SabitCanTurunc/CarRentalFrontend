@@ -35,6 +35,7 @@
       <td>{{ car.dailyPrice |currency }} </td>
       <td>{{ car.dailyPrice |vatAdded:10 |currency }} </td>
       <td>{{ car.description }}</td>  
+      <td><button (click)="addToCart(car)" type="button" class="btn btn-success">AddToCArt</button></td>
     </tr>
   </tbody>
 </table>

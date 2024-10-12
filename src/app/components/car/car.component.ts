@@ -6,43 +6,52 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { VatAddedPipe } from "../../pipes/vat-added.pipe";
 import { FormsModule } from '@angular/forms';
 import { FilterPipePipe } from '../../pipes/filter-pipe.pipe';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-car',
   standalone: true,
-  imports: [CommonModule, RouterModule, VatAddedPipe,FilterPipePipe, FormsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    VatAddedPipe,
+    FilterPipePipe,
+    FormsModule,
+  ],
   templateUrl: './car.component.html',
-  styleUrl: './car.component.css',
+  styleUrls: ['./car.component.css'],
 })
 export class CarComponent implements OnInit {
   cars: Car[] = [];
-  currentCar : Car | null=null;
-  filterText:string| null;  
-
+  currentCar: Car | null = null;
+  filterText: string | null = null;
   dataLoaded = false;
+
   constructor(
     private carService: CarService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService 
   ) {}
-//good for you
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['brandId']) {
         this.getCarsByBrand(params['brandId']);
-      }
-      else if (params['colorId']) {
+      } else if (params['colorId']) {
         this.getCarsByColor(params['colorId']);
       } else {
         this.getCars();
       }
     });
   }
+
   getCars() {
     this.carService.getCars().subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
     });
   }
+
   getCarsByBrand(brandId: number) {
     this.carService.getCarsByBrandId(brandId).subscribe((response) => {
       this.cars = response.data;
@@ -57,16 +66,21 @@ export class CarComponent implements OnInit {
     });
   }
 
-  setCurrentCar(car:Car){
+  setCurrentCar(car: Car) {
     this.currentCar = car;
   }
 
-  clearCurrentCar(){
+  clearCurrentCar() {
     this.currentCar = null;
   }
-  
 
-  
+  addToCart(car: Car) {
+    if(car.carId === 1){
+      this.toastr.error('Car cant added to cart!', 'Error!');
 
+    }else{
+      this.toastr.success('Car added to cart!', 'Success!');
 
+    }
+  }
 }

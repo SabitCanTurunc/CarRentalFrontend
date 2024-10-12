@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CarComponent } from './components/car/car.component';
 import { CarDetailsComponent } from './components/car-details/car-details.component';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 export const routes: Routes = [
   { path: '', pathMatch: "full", component: CarComponent },
@@ -16,7 +17,16 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),FormsModule],
+  imports: [RouterModule.forRoot(routes),FormsModule,ToastrModule.forRoot({
+    timeOut: 3000, // Bildirimlerin 3 saniye görünme süresi
+    positionClass: 'toast-top-right', // Bildirimlerin ekranın sağ üst köşesinde görünmesi
+    preventDuplicates: true, // Aynı mesajın birden fazla kez görünmesini engelle
+    closeButton: true, // Bildirimde kapatma butonu göster
+    progressBar: true, // İlerleme çubuğu göster
+    enableHtml: true, // HTML içeriğine izin ver
+    tapToDismiss: true // Bildirimi tıkladığında kapat
+  }),],
   exports: [RouterModule]  
 })
 export class AppRoutingModule {}
+ 
