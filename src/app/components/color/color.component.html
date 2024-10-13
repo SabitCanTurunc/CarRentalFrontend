@@ -1,13 +1,32 @@
-
 <div *ngIf="dataLoaded == false" class="spinner-border" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<h3 (click)="clearCurrentColor()" routerLink="/" >Colors</h3>
-<ul class="list-group">
-  <li 
-  (click)="setCurrentColor(color)"
-  routerLink="cars/color/{{color.id}}"
-  [class]="getCurrentColorClass(color)"
-  *ngFor="let color of colors">{{color.name}}</li>
-</ul>
+<!-- Başlık gibi collapse menü -->
+<h3
+  class="collapse-header"
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target="#colorCollapse"
+  aria-expanded="false"
+  aria-controls="colorCollapse"
+  style="cursor: pointer;"
+>
+  Colors
+  <i class="bi bi-caret-down-fill"></i>
+</h3>
+
+<!-- Collapse içeriği -->
+<div class="collapse" id="colorCollapse">
+  <ul class="list-group mt-2">
+    <li
+      *ngFor="let color of colors"
+      (click)="setCurrentColor(color)"
+      routerLink="cars/color/{{ color.id }}"
+      [class]="getCurrentColorClass(color)"
+      class="list-group-item"
+    >
+      {{ color.name }}
+    </li>
+  </ul>
+</div>

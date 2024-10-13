@@ -2,14 +2,30 @@
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<h3 (click)="clearCurrentBrand()" routerLink="/" >Brands</h3>
-<ul class="list-group">
-  <li
-    (click)="setCurrentBrand(brand)"
-    routerLink="/cars/brand/{{ brand.id }}"
-    [class]="getCurrentBrandClass(brand)"
-    *ngFor="let brand of brands"
-  >
-    {{ brand.name }}
-  </li>
-</ul>
+<h3
+  class="collapse-header"
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target="#brandCollapse"
+  aria-expanded="false"
+  aria-controls="brandCollapse"
+  style="cursor: pointer"
+>
+  Brands
+  <i class="bi bi-caret-down-fill"></i>
+</h3>
+
+<!-- Collapse içeriği -->
+<div class="collapse" id="brandCollapse">
+  <ul class="list-group mt-2">
+    <li
+      (click)="setCurrentBrand(brand)"
+      routerLink="/cars/brand/{{ brand.id }}"
+      [class]="getCurrentBrandClass(brand)"
+      *ngFor="let brand of brands"
+      class="list-group-item"
+    >
+      {{ brand.name }}
+    </li>
+  </ul>
+</div>

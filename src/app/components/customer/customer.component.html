@@ -1,21 +1,31 @@
-<p>customer works!</p>
 <div *ngIf="dataLoaded == false" class="spinner-border" role="status">
   <span class="visually-hidden">Loading...</span>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Customers</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let customer of customers">
-    <tr>
-      <td>{{ customer.id }}</td>
-      <td>{{ customer.firstName }}</td>
-      <td>{{ customer.lastName }}</td>
-      <td>{{ customer.email }}</td>
-      <td>{{ customer.companyName }}</td>
-    </tr>
-  </tbody>
-</table>
+<h3
+  class="collapse-header"
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target="#customerCollapse"
+  aria-expanded="false"
+  aria-controls="customerCollapse"
+  style="cursor: pointer"
+>
+  Customers
+  <i class="bi bi-caret-down-fill"></i>
+</h3>
+
+
+
+<!-- Collapse içeriği -->
+<div class="collapse" id="customerCollapse">
+  <ul class="list-group mt-2">
+    <li *ngFor="let customer of customers" class="list-group-item">
+      <strong>ID:</strong> {{ customer.id }}<br />
+      <strong>First Name:</strong> {{ customer.firstName }}<br />
+      <strong>Last Name:</strong> {{ customer.lastName }}<br />
+      <strong>Email:</strong> {{ customer.email }}<br />
+      <strong>Company Name:</strong> {{ customer.companyName }}
+    </li>
+  </ul>
+</div>

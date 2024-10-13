@@ -28,6 +28,6 @@ export class CartService {
     CartItems.splice(CartItems.indexOf(item), 1);
   }
   list(): CartItem[] {
-    return CartItems;
+    return CartItems;    
   }
 }

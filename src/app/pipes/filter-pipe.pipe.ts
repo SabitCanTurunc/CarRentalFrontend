@@ -3,16 +3,19 @@ import { Car } from '../models/car';
 
 @Pipe({
   name: 'filterPipe',
-  standalone: true
+  standalone: true,
 })
 export class FilterPipePipe implements PipeTransform {
+  transform(value: Car[], filterText: string | null): Car[] {
+    filterText = filterText ? filterText.toLocaleLowerCase() : null;
 
-  transform(value: Car[], filterText:string|null): Car[] {
-
-    filterText = filterText?filterText.toLocaleLowerCase():null;
-    
-
-    return filterText?value.filter((c:Car)=>c.brandName.toLocaleLowerCase().indexOf(filterText)!==-1) : value; 
+    return filterText
+      ? value.filter(
+          (c: Car) =>
+            c.brandName.toLocaleLowerCase().indexOf(filterText) !== -1 ||
+            c.colorName.toLocaleLowerCase().indexOf(filterText) !== -1 ||
+            c.description.toLocaleLowerCase().indexOf(filterText) !== -1
+        )
+      : value;
   }
-
 }
