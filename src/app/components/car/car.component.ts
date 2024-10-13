@@ -7,6 +7,7 @@ import { VatAddedPipe } from "../../pipes/vat-added.pipe";
 import { FormsModule } from '@angular/forms';
 import { FilterPipePipe } from '../../pipes/filter-pipe.pipe';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-car',
@@ -30,7 +31,8 @@ export class CarComponent implements OnInit {
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute,
-    private toastr: ToastrService 
+    private toastrService: ToastrService ,
+    private cartService:CartService,
   ) {}
 
   ngOnInit(): void {
@@ -68,19 +70,20 @@ export class CarComponent implements OnInit {
 
   setCurrentCar(car: Car) {
     this.currentCar = car;
+    
   }
 
   clearCurrentCar() {
     this.currentCar = null;
   }
 
-  addToCart(car: Car) {
-    if(car.carId === 1){
-      this.toastr.error('Car cant added to cart!', 'Error!');
-
+  addToCart(car:Car){
+    if(car.carId===1){
+      this.toastrService.error("Hata","Bu ürün sepete eklenemez")
     }else{
-      this.toastr.success('Car added to cart!', 'Success!');
-
+      this.toastrService.success("Sepete eklendi",car.brandName)
+      this.cartService.addToCart(car);
     }
-  }
+ 
+}
 }

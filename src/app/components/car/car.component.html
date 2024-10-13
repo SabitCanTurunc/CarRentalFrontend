@@ -4,15 +4,21 @@
 
 <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Search</label>
-  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Look for ...">
+  <input
+    type="text"
+    [(ngModel)]="filterText"
+    class="form-control"
+    id="filterText"
+    placeholder="Look for ..."
+  />
 </div>
 <div *ngIf="filterText" class="alert alert-primary">
-  {{filterText}} aradınız
+  {{ filterText }} aradınız
 </div>
 
 <table *ngIf="dataLoaded == true" class="table">
   <thead>
-    <tr >
+    <tr>
       <th scope="col">Car ID</th>
       <th scope="col">Brand Name</th>
       <th scope="col">Color Name</th>
@@ -23,19 +29,32 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of cars |filterPipe:filterText"
-          routerLink="/cars/details/{{car.carId}}"  
-          (click)="setCurrentCar(car)"
-          
-          >
+    <tr
+      *ngFor="let car of cars | filterPipe : filterText"
+      (click)="setCurrentCar(car)"
+    >
       <td>{{ car.carId }}</td>
       <td>{{ car.brandName }}</td>
       <td>{{ car.colorName }}</td>
       <td>{{ car.modelYear }}</td>
-      <td>{{ car.dailyPrice |currency }} </td>
-      <td>{{ car.dailyPrice |vatAdded:10 |currency }} </td>
-      <td>{{ car.description }}</td>  
-      <td><button (click)="addToCart(car)" type="button" class="btn btn-success">AddToCArt</button></td>
+      <td>{{ car.dailyPrice | currency }}</td>
+      <td>{{ car.dailyPrice | vatAdded : 10 | currency }}</td>
+      <td>{{ car.description }}</td>
+      <td>
+        <button
+          routerLink="/cars/details/{{ car.carId }}"
+          type="button"
+          class="btn btn-success"
+        >
+          Review
+        </button>
+      </td>
+
+      <td>
+        <button (click)="addToCart(car)" type="button" class="btn btn-success">
+          AddToCart
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

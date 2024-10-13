@@ -26,6 +26,7 @@ import { routes } from './app.routes';
     NaviComponent,
     HttpClientModule,
     ToastrModule,
+    
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

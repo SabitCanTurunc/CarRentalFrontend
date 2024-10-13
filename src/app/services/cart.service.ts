@@ -4,30 +4,30 @@ import { CartItems } from '../models/cartItems';
 import { CartItem } from '../models/carItem';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
+  constructor() {}
 
-  constructor() { }
-
-
-
-  addToCart(car:Car){
-    let item = CartItems.find(c => c.car.carId === car.carId);
-    if(item){
-      item.quantity++;
-
-    }else{
-      let item = new CartItem();
-      item.quantity=1;
-      CartItems.push(item);
+  addToCart(car: Car) {
+    let item = CartItems.find((c) => c.car.carId === car.carId);
+    if (item) {
+      console.log('artıyor', item);
+      item.quantity += 1;
+    } else {
+      let cartItem = new CartItem();
+      cartItem.car = car;
+      cartItem.quantity = 1;
+      console.log(cartItem, '  item calisiyor');
+      CartItems.push(cartItem);
     }
-
-
   }
-  list():CartItem[]{
+
+  removeFromCart(car: Car) {
+    let item = CartItems.find((c) => c.car.carId === car.carId);
+    CartItems.splice(CartItems.indexOf(item), 1);
+  }
+  list(): CartItem[] {
     return CartItems;
   }
-
-
 }
