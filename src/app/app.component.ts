@@ -11,6 +11,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
+import { LoginComponent } from './components/login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { routes } from './app.routes';
     NaviComponent,
     HttpClientModule,
     ToastrModule,
+    LoginComponent,
     
   ],
   templateUrl: './app.component.html',

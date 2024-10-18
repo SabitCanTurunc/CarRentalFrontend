@@ -5,6 +5,7 @@ import { CarDetailsComponent } from './components/car-details/car-details.compon
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { CarAddComponent } from './components/car-add/car-add.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: "full", component: CarComponent },
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'cars/color/:colorId', component: CarComponent },
   { path: 'cars/details/:carId', component: CarDetailsComponent },
   { path: 'cars/add', component: CarAddComponent },
+  { path: 'login', component: LoginComponent },
 
 
 

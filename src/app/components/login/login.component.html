@@ -1,0 +1,42 @@
+<body class="text-center card">
+  <main class="form-signin w-100 m-auto">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <img
+        class="mb-4"
+        src="https://res.cloudinary.com/dquzrdxog/image/upload/v1728334605/CarRental/2016a9a3-deea-4454-a761-f17460d1c6d1.png"
+        alt=""
+        width="72"
+        height="57"
+      />
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <div class="card-body">
+        <div class="form-floating">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            formControlName="email"
+          />
+          <label for="floatingInput">Email address</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <label for="floatingPassword">Password</label>
+        </div>
+
+        <button class="btn btn-primary w-100 py-2" type="submit">
+          Sign in
+        </button>
+      </div>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; TirbusoN</p>
+    </form>
+  </main>
+</body>

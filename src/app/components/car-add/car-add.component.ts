@@ -40,13 +40,21 @@ export class CarAddComponent implements OnInit {
   add() {
     if (this.carAddForm.valid) {
       let carModel = Object.assign({}, this.carAddForm.value);
-      this.carService.add(carModel).subscribe((data) => {
-        console.log(data);
-        this.toastrService.success(data.message, 'Sucess!');
-      },dataError=>{
-        console.log(dataError);
-        this.toastrService.error(dataError.error, 'Error');
-      });
+      this.carService.add(carModel).subscribe(
+        (data) => {
+          this.toastrService.success(data.message, 'Sucess!');
+        },
+        (dataError) => {
+          if(dataError.error.Errors.length>0){
+
+            for (let index = 0; index < dataError.error.Errors.length; index++) {
+            this.toastrService.error(dataError.error.Errors[index].ErrorMessage, 'Error');
+              
+            }
+
+          }
+        }
+      );
     } else {
       this.toastrService.error('Form is invalid', 'Error');
     }
