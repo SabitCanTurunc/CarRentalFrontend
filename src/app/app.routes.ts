@@ -6,32 +6,32 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { LoginComponent } from './components/login/login.component';
+import { loginGuard } from './guards/login.guard';
 
 export const routes: Routes = [
-  { path: '', pathMatch: "full", component: CarComponent },
+  { path: '', pathMatch: 'full', component: CarComponent },
   { path: 'cars', component: CarComponent },
   { path: 'cars/brand/:brandId', component: CarComponent },
   { path: 'cars/color/:colorId', component: CarComponent },
   { path: 'cars/details/:carId', component: CarDetailsComponent },
-  { path: 'cars/add', component: CarAddComponent },
+  { path: 'cars/add', component: CarAddComponent, canActivate: [loginGuard] },
   { path: 'login', component: LoginComponent },
-
-
-
-
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes),FormsModule,ToastrModule.forRoot({
-    timeOut: 3000, // Bildirimlerin 3 saniye görünme süresi
-    positionClass: 'toast-top-right', // Bildirimlerin ekranın sağ üst köşesinde görünmesi
-    preventDuplicates: true, // Aynı mesajın birden fazla kez görünmesini engelle
-    closeButton: true, // Bildirimde kapatma butonu göster
-    progressBar: true, // İlerleme çubuğu göster
-    enableHtml: true, // HTML içeriğine izin ver
-    tapToDismiss: true // Bildirimi tıkladığında kapat
-  }),],
-  exports: [RouterModule]  
+  imports: [
+    RouterModule.forRoot(routes),
+    FormsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000, // Bildirimlerin 3 saniye görünme süresi
+      positionClass: 'toast-top-right', // Bildirimlerin ekranın sağ üst köşesinde görünmesi
+      preventDuplicates: true, // Aynı mesajın birden fazla kez görünmesini engelle
+      closeButton: true, // Bildirimde kapatma butonu göster
+      progressBar: true, // İlerleme çubuğu göster
+      enableHtml: true, // HTML içeriğine izin ver
+      tapToDismiss: true, // Bildirimi tıkladığında kapat
+    }),
+  ],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
- 
