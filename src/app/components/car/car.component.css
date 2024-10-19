@@ -1,0 +1,5 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(255, 255, 255, 0.5); /* İstediğiniz rengi buraya ekleyin */
+    border-radius: 50%; /* İkonların daha yuvarlak görünmesi için */
+}

@@ -3,22 +3,25 @@ import { Brand } from '../../models/brand';
 import { BrandService } from '../../services/brand.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { BrandColorfilterpipePipe } from '../../pipes/brand-colorfilterpipe.pipe';
 
 @Component({
   selector: 'app-brand',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule, BrandColorfilterpipePipe],
   templateUrl: './brand.component.html',
   styleUrl: './brand.component.css',
 })
 export class BrandComponent implements OnInit {
   brands: Brand[] = [];
   dataLoaded = false;
-  currentBrand:Brand | null = null;
+  currentBrand: Brand | null = null;
+  filterText: string | null = null;
 
   constructor(private brandService: BrandService) {}
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.getBrand();
   }
 
@@ -29,18 +32,17 @@ export class BrandComponent implements OnInit {
     });
   }
 
-  setCurrentBrand(brand:Brand){
+  setCurrentBrand(brand: Brand) {
     this.currentBrand = brand;
-
   }
   clearCurrentBrand() {
     this.currentBrand = null;
   }
-  getCurrentBrandClass(brand:Brand){
-    if(this.currentBrand==brand){
-      return "list-group-item active";
-    }else{
-      return "list-group-item";
+  getCurrentBrandClass(brand: Brand) {
+    if (this.currentBrand == brand) {
+      return 'list-group-item active';
+    } else {
+      return 'list-group-item';
     }
   }
 }

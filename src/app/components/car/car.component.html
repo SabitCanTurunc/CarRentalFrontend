@@ -12,49 +12,98 @@
     placeholder="Look for ..."
   />
 </div>
+
 <div *ngIf="filterText" class="alert alert-primary">
   {{ filterText }} aradınız
 </div>
+<div *ngIf="dataLoaded == true" class="row">
+  <div class="col-md-4 mb-3" *ngFor="let car of cars | filterPipe : filterText">
+    <div class="card h-100">
+      <div class="card-head">
+        <div class="col-md-12">
+          <div
+            id="carImagesCarousel{{ car.carId }}"
+            class="carousel slide p-5"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div *ngIf="images[car.carId]?.length > 0; else defaultImage">
+                <div
+                  class="carousel-item"
+                  *ngFor="let image of images[car.carId]; let i = index"
+                  [ngClass]="{ active: i === 0 }"
+                >
+                  <img
+                    [src]="image.imagePath"
+                    class="d-block w-100 shadow-lg"
+                    alt="Car Image"
+                  />
+                </div>
+              </div>
+              <ng-template #defaultImage>
+                <div class="carousel-item active">
+                  <img
+                    src="https://res.cloudinary.com/dquzrdxog/image/upload/v1728334605/CarRental/2016a9a3-deea-4454-a761-f17460d1c6d1.png"
+                    class="d-block w-100 shadow-lg"
+                    alt="Default Image"
+                  />
+                </div>
+              </ng-template>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              [attr.data-bs-target]="'#carImagesCarousel' + car.carId"
+              data-bs-slide="prev"
+              aria-label="Previous"
+            >
+              <span class="carousel-control-prev-icon bg-dark"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              [attr.data-bs-target]="'#carImagesCarousel' + car.carId"
+              data-bs-slide="next"
+              aria-label="Next"
+            >
+              <span class="carousel-control-next-icon bg-dark"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
-<table *ngIf="dataLoaded == true" class="table">
-  <thead>
-    <tr>
-      <th scope="col">Car ID</th>
-      <th scope="col">Brand Name</th>
-      <th scope="col">Color Name</th>
-      <th scope="col">Model Year</th>
-      <th scope="col">Daily Price</th>
-      <th scope="col">Taxed Price</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let car of cars | filterPipe : filterText"
-      (click)="setCurrentCar(car)"
-    >
-      <td>{{ car.carId }}</td>
-      <td>{{ car.brandName }}</td>
-      <td>{{ car.colorName }}</td>
-      <td>{{ car.modelYear }}</td>
-      <td>{{ car.dailyPrice | currency }}</td>
-      <td>{{ car.dailyPrice | vatAdded : 10 | currency }}</td>
-      <td>{{ car.description }}</td>
-      <td>
-        <button
-          routerLink="/cars/details/{{ car.carId }}"
-          type="button"
-          class="btn btn-success"
-        >
-          Review
-        </button>
-      </td>
-
-      <td>
-        <button (click)="addToCart(car)" type="button" class="btn btn-success">
-          AddToCart
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      <div class="card-body">
+        <h5 class="card-title">{{ car.brandName }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Model Year: {{ car.modelYear }}
+        </h6>
+        <p class="card-text">
+          <strong>Car ID:</strong> {{ car.carId }}<br />
+          <strong>Color:</strong> {{ car.colorName }}<br />
+          <strong>Daily Price:</strong> {{ car.dailyPrice | currency }}<br />
+          <strong>Taxed Price:</strong>
+          {{ car.dailyPrice | vatAdded : 10 | currency }}<br />
+          <strong>Description:</strong> {{ car.description }}
+        </p>
+        <div class="d-flex justify-content-between">
+          <button
+            routerLink="/cars/details/{{ car.carId }}"
+            type="button"
+            class="btn btn-success"
+          >
+            Review
+          </button>
+          <button
+            (click)="addToCart(car)"
+            type="button"
+            class="btn btn-success"
+          >
+            AddToCart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

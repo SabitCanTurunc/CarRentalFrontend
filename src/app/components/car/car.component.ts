@@ -3,11 +3,13 @@ import { Car } from '../../models/car';
 import { CarService } from '../../services/car.service';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { VatAddedPipe } from "../../pipes/vat-added.pipe";
+import { VatAddedPipe } from '../../pipes/vat-added.pipe';
 import { FormsModule } from '@angular/forms';
-import { FilterPipePipe } from '../../pipes/filter-pipe.pipe';
-import { ToastrService, ToastrModule } from 'ngx-toastr';
+import { CarFilterPipePipe } from '../../pipes/car-filter-pipe.pipe';
+import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../services/cart.service';
+import { CarImageService } from '../../services/car-image.service';
+import { Image } from '../../models/image';
 
 @Component({
   selector: 'app-car',
@@ -16,7 +18,7 @@ import { CartService } from '../../services/cart.service';
     CommonModule,
     RouterModule,
     VatAddedPipe,
-    FilterPipePipe,
+    CarFilterPipePipe,
     FormsModule,
   ],
   templateUrl: './car.component.html',
@@ -24,15 +26,16 @@ import { CartService } from '../../services/cart.service';
 })
 export class CarComponent implements OnInit {
   cars: Car[] = [];
-  currentCar: Car | null = null;
   filterText: string | null = null;
   dataLoaded = false;
+  images: { [key: number]: Image[] } = {}; // carId ile resimleri ilişkilendiriyoruz
 
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute,
-    private toastrService: ToastrService ,
-    private cartService:CartService,
+    private toastrService: ToastrService,
+    private cartService: CartService,
+    private carImageService: CarImageService
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +54,7 @@ export class CarComponent implements OnInit {
     this.carService.getCars().subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
+      this.loadImagesForCars(); // Tüm arabaların resimlerini yükle
     });
   }
 
@@ -58,6 +62,7 @@ export class CarComponent implements OnInit {
     this.carService.getCarsByBrandId(brandId).subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
+      this.loadImagesForCars(); // Tüm arabaların resimlerini yükle
     });
   }
 
@@ -65,25 +70,28 @@ export class CarComponent implements OnInit {
     this.carService.getCarsByColorId(colorId).subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
+      this.loadImagesForCars(); // Tüm arabaların resimlerini yükle
     });
   }
 
-  setCurrentCar(car: Car) {
-    this.currentCar = car;
-    
+  loadImagesForCars() {
+    this.cars.forEach((car) => {
+      this.getImages(car.carId); // Her araç için resimleri yükle
+    });
   }
 
-  clearCurrentCar() {
-    this.currentCar = null;
+  getImages(carId: number) {
+    this.carImageService.GetImages(carId).subscribe((response) => {
+      this.images[carId] = response.data;
+    });
   }
 
-  addToCart(car:Car){
-    if(car.carId===1){
-      this.toastrService.error("Hata","Bu ürün sepete eklenemez")
-    }else{
-      this.toastrService.success("Sepete eklendi",car.brandName)
+  addToCart(car: Car) {
+    if (car.carId === 1) {
+      this.toastrService.error('Hata', 'Bu ürün sepete eklenemez');
+    } else {
+      this.toastrService.success('Sepete eklendi', car.brandName);
       this.cartService.addToCart(car);
     }
- 
-}
+  }
 }

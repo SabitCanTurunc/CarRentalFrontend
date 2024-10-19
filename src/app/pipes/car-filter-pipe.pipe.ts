@@ -5,13 +5,13 @@ import { Car } from '../models/car';
   name: 'filterPipe',
   standalone: true,
 })
-export class FilterPipePipe implements PipeTransform {
+export class CarFilterPipePipe implements PipeTransform {
   transform(value: Car[], filterText: string | null): Car[] {
     filterText = filterText ? filterText.toLocaleLowerCase() : null;
 
     return filterText
       ? value.filter(
-          (c: Car) =>
+          (c) =>
             c.brandName.toLocaleLowerCase().indexOf(filterText) !== -1 ||
             c.colorName.toLocaleLowerCase().indexOf(filterText) !== -1 ||
             c.description.toLocaleLowerCase().indexOf(filterText) !== -1

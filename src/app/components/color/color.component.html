@@ -19,8 +19,23 @@
 <!-- Collapse içeriği -->
 <div class="collapse" id="colorCollapse">
   <ul class="list-group mt-2">
+    <div class="mb-3">
+      <label for="filterText" class="form-label">Search</label>
+      <input
+        type="text"
+        [(ngModel)]="filterText"
+        class="form-control"
+        id="filterText"
+        placeholder="Look for ..."
+      />
+    </div>
+    
+    <div *ngIf="filterText" class="alert alert-primary">
+      {{ filterText }} aradınız
+    </div>
+    
     <li
-      *ngFor="let color of colors"
+      *ngFor="let color of colors |brandfilterpipe:filterText"
       (click)="setCurrentColor(color)"
       routerLink="cars/color/{{ color.id }}"
       [class]="getCurrentColorClass(color)"
