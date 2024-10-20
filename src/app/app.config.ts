@@ -23,11 +23,11 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
 
     provideToastr(),
-    // provideHttpClient(withInterceptors([AuthInterceptor])),
+
     provideRouter(routes),
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor, // `useValue` yerine `useClass` kullanmalısınız
+      useClass: AuthInterceptor,
       multi: true,
     },
   ],

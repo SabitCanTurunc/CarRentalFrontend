@@ -28,11 +28,11 @@ export class ImageComponent implements OnInit  {
     });
   }
 
-  getImages(carId:number){
+  public getImages(carId:number){
     this.imageService.GetImages(carId).subscribe((response) => {
       this.images = response.data; 
-      this.dataLoaded = true;
     });
   }
+  
 
 }
