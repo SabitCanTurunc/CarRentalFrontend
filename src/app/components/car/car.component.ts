@@ -10,6 +10,10 @@ import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../services/cart.service';
 import { CarImageService } from '../../services/car-image.service';
 import { Image } from '../../models/image';
+import { ColorComponent } from '../color/color.component';
+import { BrandComponent } from '../brand/brand.component';
+
+
 
 @Component({
   selector: 'app-car',
@@ -20,6 +24,9 @@ import { Image } from '../../models/image';
     VatAddedPipe,
     CarFilterPipePipe,
     FormsModule,
+    ColorComponent,
+    BrandComponent,
+    
   ],
   templateUrl: './car.component.html',
   styleUrls: ['./car.component.css'],

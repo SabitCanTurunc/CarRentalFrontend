@@ -24,8 +24,11 @@ export class AuthInterceptor implements HttpInterceptor {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
 
+      console.log('Token:', token); // Log the retrieved token
+
       if (token) {
         if (this.checkTokenExpiration(token)) {
+          console.log('Token geçerli, istek gönderiliyor.'); // Log valid token
           const clonedRequest = req.clone({
             headers: req.headers.set('Authorization', `Bearer ${token}`),
           });
@@ -39,11 +42,13 @@ export class AuthInterceptor implements HttpInterceptor {
         } else {
           // Token süresi dolmuşsa,
           localStorage.removeItem('token');
-          console.warn("Token süresi dolmuş, localStorage'dan silindi.");
+          console.warn("Token süresi dolmuş, localStorage'dan silindi."); // Log token removal
 
           this.router.navigate(['/login']);
           return throwError({ error: 'Token geçersiz veya süresi dolmuş.' });
         }
+      } else {
+        console.warn('Token bulunamadı.'); // Log when no token is found
       }
     }
 
@@ -57,6 +62,9 @@ export class AuthInterceptor implements HttpInterceptor {
         const payload = JSON.parse(atob(token.split('.')[1]));
         const expiration = new Date(payload.exp * 1000);
         const now = new Date();
+
+        console.log('Token süresi:', expiration); // Log expiration date
+        console.log('Şu anki zaman:', now); // Log current time
 
         return expiration > now;
       } catch (error) {

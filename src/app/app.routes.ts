@@ -7,6 +7,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { LoginComponent } from './components/login/login.component';
 import { loginGuard } from './guards/login.guard';
+import { isAdminGuard } from './guards/is-admin.guard';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: CarComponent },
@@ -14,8 +16,10 @@ export const routes: Routes = [
   { path: 'cars/brand/:brandId', component: CarComponent },
   { path: 'cars/color/:colorId', component: CarComponent },
   { path: 'cars/details/:carId', component: CarDetailsComponent },
-  { path: 'cars/add', component: CarAddComponent, canActivate: [loginGuard] },
+  { path: 'cars/add', component: CarAddComponent, canActivate: [isAdminGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminPanelComponent },
+
 ];
 
 @NgModule({
