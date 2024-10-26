@@ -26,4 +26,9 @@ export class NaviComponent implements OnInit {
     this.userName = this.userExists ? this.userActionsService.getNameFromToken() : null;
     console.log(this.userName); // Durumu görmek için log
   }
+
+  logout(){
+    this.userActionsService.logout();
+    console.log("logout basıldı");
+  }
 }

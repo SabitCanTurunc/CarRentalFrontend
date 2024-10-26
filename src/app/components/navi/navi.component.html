@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg  bg-dark-blue">
-  <div class="container-fluid ">
-    <a class="navbar-brand text-white " href="/"
+<nav class="navbar navbar-expand-lg bg-dark-blue">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="/"
       ><h1>C<i class="bi bi-car-front-fill"></i>rRental</h1></a
     >
     <button
@@ -15,26 +15,33 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-        <li class="nav-item ">
-          <a class="nav-link active text-white " aria-current="page" href="/">Home</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="/"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="#">Link</a>
+          <a class="nav-link text-white" href="#">Link</a>
         </li>
         <app-cart-summary></app-cart-summary>
 
         <li class="nav-item">
-          <a class="nav-link disabled text-white " aria-disabled="true">Disabled</a>
+          <a class="nav-link disabled text-white" aria-disabled="true"
+            >Disabled</a
+          >
         </li>
       </ul>
+      <div class="d-flex justify-content-center flex-grow-1">
+        <div *ngIf="userExists" class="text-white">
+          <p class="mb-0">Welcome {{ userName }}!</p>
+        </div>
+      </div>
       <div *ngIf="!userExists" class="btn">
-        <a href="/login" class="btn btn-orange " aria-current="page">Login</a>
-        
+        <a href="/login" class="btn btn-orange" aria-current="page">Login</a>
       </div>
       <div *ngIf="userExists" class="text-white">
-        <p>Welcome {{userName}} !</p>
-        
+        <a href="/" class="btn btn-orange" (click)="logout()" aria-current="page">Logout</a>
       </div>
     </div>
   </div>

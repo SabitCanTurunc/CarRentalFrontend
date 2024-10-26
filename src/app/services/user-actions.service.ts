@@ -31,6 +31,10 @@ export class UserActionsService {
 
   }
 
+  logout(){
+    localStorage.removeItem('token');
+  }
+
 
  
 }

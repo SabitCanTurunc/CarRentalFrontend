@@ -47,4 +47,6 @@ isAdmin(): boolean {
   return false; // Token yoksa veya admin değilse false döner
 }
 
+
+
 }
