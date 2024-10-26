@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private toastrService: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,16 +42,20 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       let loginModel = Object.assign({}, this.loginForm.value);
 
-      this.authService.login(loginModel).subscribe((response) => {
-        this.toastrService.info(response.message, "Login successful");
+      this.authService.login(loginModel).subscribe(
+        (response) => {
+          this.toastrService.info(response.message, 'Login successful');
 
-        localStorage.setItem("token", response.data.token);
-      },responseError=>{
-        this.toastrService.error(responseError.error, "Login failed");
-        console.log(responseError)
-
-      }
-    );
+          localStorage.setItem('token', response.data.token);
+          console.log('Token öncesi:', localStorage.getItem('token'));
+          // this.router.navigate(['/']);
+          console.log('Token sonrası:', localStorage.getItem('token'));
+        },
+        (responseError) => {
+          this.toastrService.error(responseError.error, 'Login failed');
+          console.log(responseError);
+        }
+      );
     }
   }
 }

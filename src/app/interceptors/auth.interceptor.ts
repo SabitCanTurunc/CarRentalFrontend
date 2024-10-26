@@ -24,35 +24,33 @@ export class AuthInterceptor implements HttpInterceptor {
     if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
 
-      console.log('Token:', token); // Log the retrieved token
+      console.log('Token var mıı:', token); // Token'in olup olmadığını logla
 
       if (token) {
+        // Token süresini kontrol et
         if (this.checkTokenExpiration(token)) {
-          console.log('Token geçerli, istek gönderiliyor.'); // Log valid token
+          // console.log('Token geçerli, istek gönderiliyor.');
           const clonedRequest = req.clone({
             headers: req.headers.set('Authorization', `Bearer ${token}`),
           });
-          // Klonlanan istekle devam et
+
           return next.handle(clonedRequest).pipe(
             catchError((err) => {
               console.error('HTTP isteği hatası:', err);
-              return throwError(err); // Hata durumunda hatayı tekrar fırlat
+              return throwError(err);
             })
           );
         } else {
-          // Token süresi dolmuşsa,
+          // console.warn("Token süresi dolmuş, localStorage'dan silindi.");
           localStorage.removeItem('token');
-          console.warn("Token süresi dolmuş, localStorage'dan silindi."); // Log token removal
-
           this.router.navigate(['/login']);
           return throwError({ error: 'Token geçersiz veya süresi dolmuş.' });
         }
       } else {
-        console.warn('Token bulunamadı.'); // Log when no token is found
+        console.warn('Token bulunamadı.');
       }
     }
 
-    // Token yoksa veya tarayıcıda değilsek, orijinal istekle devam et
     return next.handle(req);
   }
 
@@ -60,15 +58,24 @@ export class AuthInterceptor implements HttpInterceptor {
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
-        const expiration = new Date(payload.exp * 1000);
+
+        if (!payload.exp) {
+          console.error('Token süresi bilgisi bulunamadı.');
+          return false;
+        }
+
+        const expiration = new Date(payload.exp * 1000); // Payload'daki 'exp' süresini milisaniyeye çeviriyoruz
         const now = new Date();
 
-        console.log('Token süresi:', expiration); // Log expiration date
-        console.log('Şu anki zaman:', now); // Log current time
+        // console.log('Token süresi:', expiration); // Token bitiş süresini loglama
+        // console.log('Şu anki zaman:', now); // Şu anki zamanı loglama
 
-        return expiration > now;
+        if(expiration > now){
+          return true;
+        }
+        
       } catch (error) {
-        console.error('Token çözme hatası:', error);
+        console.error('Token çözme hatası:', error); // Token'ı decode ederken oluşan hatayı logluyoruz
       }
     }
     return false;

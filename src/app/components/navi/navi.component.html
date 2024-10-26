@@ -28,8 +28,12 @@
           <a class="nav-link disabled text-white " aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <div class="btn">
+      <div *ngIf="!userExists" class="btn">
         <a href="/login" class="btn btn-orange " aria-current="page">Login</a>
+        
+      </div>
+      <div *ngIf="userExists" class="text-white">
+        <p>Welcome {{userName}} !</p>
         
       </div>
     </div>
