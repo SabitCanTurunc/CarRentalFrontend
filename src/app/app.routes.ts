@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { loginGuard } from './guards/login.guard';
 import { isAdminGuard } from './guards/is-admin.guard';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', component: CarComponent },
@@ -18,8 +19,9 @@ export const routes: Routes = [
   { path: 'cars/details/:carId', component: CarDetailsComponent },
   { path: 'cars/add', component: CarAddComponent, canActivate: [isAdminGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminPanelComponent },
+  { path: 'register', component: RegisterComponent },
 
+  { path: 'admin', component: AdminPanelComponent },
 ];
 
 @NgModule({

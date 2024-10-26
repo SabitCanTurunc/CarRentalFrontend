@@ -3,3 +3,69 @@
     background-color: rgba(255, 255, 255, 0.5); /* İstediğiniz rengi buraya ekleyin */
     border-radius: 50%; /* İkonların daha yuvarlak görünmesi için */
 }
+.carousel-image {
+    max-height: 400px; /* İstediğiniz maksimum yükseklik */
+    object-fit: cover; /* Resmin orantısını koruyarak kesme yapar */
+    min-height: 350px;
+}
+
+/* styles.css */
+
+/* Renk Paleti */
+:root {
+    --orange-color: #FF6500;
+    --navy-color: #1E3E62;
+    --dark-blue-color: #0B192C;
+    --black-color: #000000;
+    --white-color: #FFFFFF; /* Kapsama alanını artırmak için beyaz rengi de tanımladık */
+}
+
+/* Bootstrap için Özel Sınıflar */
+.btn-orange {
+    background-color: var(--orange-color);
+    color: var(--white-color); /* Düğmenin yazı rengi için */
+}
+
+.text-navy {
+    color: var(--navy-color);
+}
+
+.text-white {
+    color: var(--white-color);
+}
+
+.bg-navy {
+    background-color: var(--navy-color);
+}
+.bg-orange {
+    background-color: var(--orange-color);
+}
+.bg-black {
+    background-color: var(--black-color);
+}
+.bg-dark-blue {
+    background-color: var(--dark-blue-color);
+}
+
+.text-black {
+    color: var(--black-color);
+}
+
+/* Örnek: Butonların Hover Etkisi */
+.btn-orange:hover {
+    background-color: var(--dark-blue-color); /* Hover durumu için farklı renk */
+}
+
+/* Diğer Bootstrap Sınıflarıyla Birlikte Kullanım */
+.btn-custom {
+    background-color: var(--navy-color);
+    color: var(--white-color);
+}
+
+.fixed-sidebar {
+    position: sticky; /* Dikey kaydırma için sabit konum */
+    top: 0; /* Üstteki boşluk */
+    height: 100vh; /* Tam görünüm yüksekliği */
+    overflow-y: auto; /* Dikey kaydırma */
+    background-color:#012556;
+  }

@@ -1,0 +1,49 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .admin-panel-title {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #343a40; /* Koyu gri rengi */
+  }
+  
+  .nav-header {
+    font-weight: bold;
+    margin: 10px 0;
+    color: #6c757d; /* Açık gri rengi */
+  }
+  
+  .nav-pills {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-item {
+    margin: 5px 0;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #495057; /* Koyu gri rengi */
+    text-decoration: none; /* Altı çizgiyi kaldırır */
+    transition: background-color 0.3s, color 0.3s; /* Geçiş efekti */
+  }
+  
+  .nav-link:hover {
+    background-color: #f8f9fa; /* Açık gri arka plan */
+    color: #007bff; /* Mavi rengi */
+  }
+  
+  .nav-link.active {
+    background-color: #007bff; /* Aktif sekme mavi rengi */
+    color: white; /* Beyaz yazı rengi */
+  }
+  
+  .nav-icon {
+    margin-right: 10px; /* İkon ve metin arasındaki boşluk */
+  }
+  

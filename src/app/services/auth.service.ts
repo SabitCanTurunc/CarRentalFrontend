@@ -5,6 +5,7 @@ import { LoginModel } from '../models/loginModel';
 import { TokenModel } from '../models/tokenModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { ToastrService } from 'ngx-toastr';
+import { RegisterModel } from '../models/register';
 
 @Injectable({
   providedIn: 'root', // Servis kök seviyesinde sağlanıyor
@@ -17,6 +18,10 @@ export class AuthService {
   login(user: LoginModel) {
     return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + 'login', user);
   }
+  register(user: RegisterModel) {
+    return this.httpClient.post<SingleResponseModel<TokenModel>>(this.apiUrl + 'register', user);
+  }
+
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token'); // Token varsa true döner

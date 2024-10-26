@@ -1,16 +1,17 @@
-<body class="text-center card">
-  <main class="form-signin w-100 m-auto">
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
+<div class=" min-vh-100 d-flex align-items-center  justify-content-center">
+  <div class="card w-100 align-items-center "  style="max-width: 400px; ">
+    <div class="card-body text-center ">
       <img
         class="mb-4"
         src="https://res.cloudinary.com/dquzrdxog/image/upload/v1728334605/CarRental/2016a9a3-deea-4454-a761-f17460d1c6d1.png"
-        alt=""
+        alt="logo"
         width="72"
         height="57"
       />
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-      <div class="card-body">
-        <div class="form-floating">
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        
+        <div class="form-floating mb-3">
           <input
             type="email"
             class="form-control"
@@ -21,7 +22,7 @@
           <label for="floatingInput">Email address</label>
         </div>
 
-        <div class="form-floating">
+        <div class="form-floating mb-3">
           <input
             type="password"
             class="form-control"
@@ -35,8 +36,9 @@
         <button class="btn btn-primary w-100 py-2" type="submit">
           Sign in
         </button>
-      </div>
+      </form>
+      <p class="mt-3"><a href="/register">Don't you have an account?</a></p>
       <p class="mt-5 mb-3 text-body-secondary">&copy; TirbusoN</p>
-    </form>
-  </main>
-</body>
+    </div>
+  </div>
+</div>

@@ -1,17 +1,17 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
-      <h1>Filter By</h1>
+    <div class=" container-fluid col-md-2 fixed-sidebar">
+      <h1 class="text-white">Filter By</h1>
       <app-brand></app-brand>
       <app-color></app-color>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-10 shadow-lg" style="margin-left: px">
       <div *ngIf="dataLoaded == false" class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
 
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Search</label>
+      <div class="input-group flex-nowrap my-3">
+        <span class="input-group-text" id="addon-wrapping">Search</span>
         <input
           type="text"
           [(ngModel)]="filterText"
@@ -29,8 +29,8 @@
           class="col-md-4 mb-3"
           *ngFor="let car of cars | filterPipe : filterText"
         >
-          <div class="card h-100">
-            <div class="card-head">
+          <div class="card h-auto shadow-lg">
+            <div class="card-head shadow-lg">
               <div class="col-md-12">
                 <div
                   id="carImagesCarousel{{ car.carId }}"
@@ -48,7 +48,7 @@
                       >
                         <img
                           [src]="image.imagePath"
-                          class="d-block w-100 shadow-lg"
+                          class="d-block w-100 shadow-lg carousel-image"
                           alt="Car Image"
                         />
                       </div>
@@ -57,7 +57,7 @@
                       <div class="carousel-item active">
                         <img
                           src="https://res.cloudinary.com/dquzrdxog/image/upload/v1728334605/CarRental/2016a9a3-deea-4454-a761-f17460d1c6d1.png"
-                          class="d-block w-100 shadow-lg"
+                          class="d-block w-100 shadow-lg carousel-image"
                           alt="Default Image"
                         />
                       </div>
@@ -103,18 +103,18 @@
               </p>
               <div class="d-flex justify-content-between">
                 <button
-                  routerLink="/cars/details/{{ car.carId }}"
-                  type="button"
-                  class="btn btn-success"
-                >
-                  Review
-                </button>
-                <button
                   (click)="addToCart(car)"
                   type="button"
-                  class="btn btn-success"
+                  class="btn btn-orange"
                 >
-                  AddToCart
+                  <i class="bi bi-cart4"></i>
+                </button>
+                <button
+                  routerLink="/cars/details/{{ car.carId }}"
+                  type="button"
+                  class="btn btn-orange"
+                >
+                  Review
                 </button>
               </div>
             </div>

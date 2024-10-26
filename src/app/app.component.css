@@ -1,0 +1,10 @@
+app-navi {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Üstte görünmesini sağlamak için yüksek bir değer */
+}
+/* İçerik alanı için üst boşluk ayarı */
+.content {
+    margin-top: 82px; /* Navigasyon çubuğunun yüksekliği kadar boşluk bırak */
+}

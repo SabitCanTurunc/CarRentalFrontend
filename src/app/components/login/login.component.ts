@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  host: { ngSkipHydration: '' },
+  // host: { ngSkipHydration: '' },
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],

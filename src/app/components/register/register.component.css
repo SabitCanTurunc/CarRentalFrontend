@@ -1,3 +1,14 @@
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(255, 255, 255, 0.5); /* İstediğiniz rengi buraya ekleyin */
+    border-radius: 50%; /* İkonların daha yuvarlak görünmesi için */
+}
+.carousel-image {
+    max-height: 400px; /* İstediğiniz maksimum yükseklik */
+    object-fit: cover; /* Resmin orantısını koruyarak kesme yapar */
+    min-height: 350px;
+}
+
 /* styles.css */
 
 /* Renk Paleti */
@@ -50,3 +61,4 @@
     background-color: var(--navy-color);
     color: var(--white-color);
 }
+
